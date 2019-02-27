@@ -1,19 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class SavedList extends Component {
-  constructor(props) {
-    super(props);
-  }
 
-  render() {
+const SavedList = props => {
     return (
       <div className="saved-list">
         <h3>Saved Movies:</h3>
-        {this.props.list.map(movie => (
-          <span className="saved-movie">{movie.title}</span>
+        {props.list.map(movie => (
+          <span key={movie.id} className="saved-movie" onClick={goMovie}>{movie.title}</span>
         ))}
-        <div className="home-button">Home</div>
+          <div className="home-button" onClick={goHome}>Home</div>
       </div>
     );
+
+    function goMovie() {
+      props.history.push("/movies/:id")
+    }
+
+    function goHome() {
+      props.history.push("/");
   }
 }
+
+  export default SavedList;
+
+
+
